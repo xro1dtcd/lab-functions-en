@@ -193,13 +193,13 @@ def test_alpha(fn):
 
 def test_pass(fn):
     class TestKnown(unittest.TestCase):
-        def __init__(self, input, output):
+        def __init__(self, input_, output):
             super(TestKnown, self).__init__()
-            self.input = input
+            self.input_ = input_
             self.output = output
-            
+
         def runTest(self):
-            self.assertEqual(fn(self.input), self.output, f"Should be {self.output}")
+            self.assertEqual(fn(self.input_), self.output, f"For this password, {self.input_}, the output should be {self.output}")
     suite = unittest.TestSuite()
     check_p = lambda string: sum([len(set(string)&set(c))>0 for c in [ascii_lowercase, ascii_uppercase, digits, "#@!$%&()^*[]{}"]] + [len(string) >= 8]) >= 5
     tests = ["".join([random.choice(ascii_lowercase*3+ascii_uppercase+digits+"#@!$%&()^*[]{}") for _ in range(random.randint(2,16))]) for _ in range(100)] 
